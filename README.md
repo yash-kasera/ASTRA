@@ -5,6 +5,7 @@
 > With ASTRA, a power cut or a server crash no longer cancels a computer-based exam. The exam pauses, candidates continue from exactly where they stopped, and no answer or minute is lost.
 
 **▶ Try the clickable design prototype: [yash-kasera.github.io/ASTRA/prototype](https://yash-kasera.github.io/ASTRA/prototype/)** (or open [`prototype/index.html`](prototype/index.html) locally).
+**📘 New here? Follow the [Prototype Guide](docs/PROTOTYPE_GUIDE.md)**: a 5-minute, step-by-step tour with screenshots.
 *(Simulated data. It shows how ASTRA would behave during a real power cut, step by step, from five points of view.)*
 
 ---

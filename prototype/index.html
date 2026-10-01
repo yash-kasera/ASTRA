@@ -29,6 +29,7 @@ nav button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
 .story .txt div{color:var(--muted);font-size:13px}
 .story .ctl button{font:inherit;font-weight:700;border:none;border-radius:8px;padding:8px 14px;cursor:pointer}
 .prev{background:#e2e8f0;color:var(--ink)} .next{background:var(--teal);color:#fff}
+.story .ctl button:disabled{opacity:.4;cursor:not-allowed}
 main{padding:16px;max-width:1200px;margin:0 auto}
 .grid{display:grid;gap:12px}
 .g2{grid-template-columns:repeat(2,minmax(0,1fr))} .g3{grid-template-columns:repeat(3,minmax(0,1fr))} .g4{grid-template-columns:repeat(4,minmax(0,1fr))}
@@ -363,9 +364,23 @@ async function viewTrust(){
 }
 
 /* ---------------- Main render ---------------- */
+/* Deep links, e.g. #tab=centre&step=3&cover=1&tamper=1&approved=1 (steps are 1-7 in links) */
+function readLink(){
+  const p = new URLSearchParams(location.hash.slice(1));
+  if (TABS.some(([k]) => k === p.get("tab"))) tab = p.get("tab");
+  const s = parseInt(p.get("step"), 10);
+  if (s >= 1 && s <= STEPS.length) step = s - 1;
+  camCovered = p.get("cover") === "1";
+  tampered = p.get("tamper") === "1";
+  return p.get("approved") === "1";
+}
+let linkApproved = readLink();
+window.addEventListener("hashchange", () => { linkApproved = readLink(); render(); });
+
 async function render(){
   if(step<4) resumedApproved=false;
   if(step>=5) resumedApproved=true;
+  if(step===4 && linkApproved){ resumedApproved=true; linkApproved=false; }
   renderShell();
   if(tab==="candidate") await viewCandidate();
   else if(tab==="invigilator") viewInvigilator();

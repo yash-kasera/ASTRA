@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 190" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect width="900" height="190" fill="#fff"/>
+  <g text-anchor="middle">
+    <rect x="10" y="20" width="158" height="150" rx="10" fill="#1e3a5f"/>
+    <text x="89" y="48" fill="#fff" font-size="16" font-weight="700">PREVENTION</text>
+    <text x="89" y="74" fill="#cbd5e1" font-size="11.5">Centre health check</text>
+    <text x="89" y="92" fill="#cbd5e1" font-size="11.5">Backup practice drills</text>
+    <text x="89" y="110" fill="#cbd5e1" font-size="11.5">Paper delivered early</text>
+    <text x="89" y="128" fill="#cbd5e1" font-size="11.5">Risky centres flagged</text>
+    <text x="89" y="146" fill="#cbd5e1" font-size="11.5">Locked-down exam PCs</text>
+
+    <rect x="191" y="20" width="158" height="150" rx="10" fill="#0f766e"/>
+    <text x="270" y="48" fill="#fff" font-size="16" font-weight="700">DETECTION</text>
+    <text x="270" y="74" fill="#ccfbf1" font-size="11.5">Live health signals</text>
+    <text x="270" y="92" fill="#ccfbf1" font-size="11.5">Predicts failures</text>
+    <text x="270" y="110" fill="#ccfbf1" font-size="11.5">Identifies the problem</text>
+    <text x="270" y="128" fill="#ccfbf1" font-size="11.5">Spots unusual activity</text>
+    <text x="270" y="146" fill="#ccfbf1" font-size="11.5">Camera tamper alerts</text>
+
+    <rect x="372" y="20" width="158" height="150" rx="10" fill="#b45309"/>
+    <text x="451" y="48" fill="#fff" font-size="16" font-weight="700">RESPONSE</text>
+    <text x="451" y="74" fill="#fef3c7" font-size="11.5">Ready-made action steps</text>
+    <text x="451" y="92" fill="#fef3c7" font-size="11.5">Exam clock paused</text>
+    <text x="451" y="110" fill="#fef3c7" font-size="11.5">Candidates informed</text>
+    <text x="451" y="128" fill="#fef3c7" font-size="11.5">Right officials alerted</text>
+    <text x="451" y="146" fill="#fef3c7" font-size="11.5">Handles traffic spikes</text>
+
+    <rect x="553" y="20" width="158" height="150" rx="10" fill="#7c3aed"/>
+    <text x="632" y="48" fill="#fff" font-size="16" font-weight="700">RECOVERY</text>
+    <text x="632" y="74" fill="#ede9fe" font-size="11.5">Continue on any PC</text>
+    <text x="632" y="92" fill="#ede9fe" font-size="11.5">Exact time returned</text>
+    <text x="632" y="110" fill="#ede9fe" font-size="11.5">All copies cross-checked</text>
+    <text x="632" y="128" fill="#ede9fe" font-size="11.5">Guided decisions</text>
+    <text x="632" y="146" fill="#ede9fe" font-size="11.5">Re-test only if needed</text>
+
+    <rect x="734" y="20" width="158" height="150" rx="10" fill="#be123c"/>
+    <text x="813" y="48" fill="#fff" font-size="16" font-weight="700">TRUST</text>
+    <text x="813" y="74" fill="#ffe4e6" font-size="11.5">Tamper-proof records</text>
+    <text x="813" y="92" fill="#ffe4e6" font-size="11.5">Answer receipts</text>
+    <text x="813" y="110" fill="#ffe4e6" font-size="11.5">Automatic reports</text>
+    <text x="813" y="128" fill="#ffe4e6" font-size="11.5">Public status page</text>
+    <text x="813" y="146" fill="#ffe4e6" font-size="11.5">Finds repeat problems</text>
+  </g>
+  <line x1="169" y1="95" x2="189" y2="95" stroke="#475569" stroke-width="2.5" marker-end="url(#b)"/>
+  <line x1="350" y1="95" x2="370" y2="95" stroke="#475569" stroke-width="2.5" marker-end="url(#b)"/>
+  <line x1="531" y1="95" x2="551" y2="95" stroke="#475569" stroke-width="2.5" marker-end="url(#b)"/>
+  <line x1="712" y1="95" x2="732" y2="95" stroke="#475569" stroke-width="2.5" marker-end="url(#b)"/>
+</svg>

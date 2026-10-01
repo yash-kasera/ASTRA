@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ASTRA Design Prototype</title>
+<style>
+:root{
+  --navy:#1e3a5f; --teal:#0f766e; --amber:#b45309; --red:#be123c; --violet:#7c3aed;
+  --bg:#f1f5f9; --card:#ffffff; --ink:#0f172a; --muted:#475569; --line:#cbd5e1;
+  --ok:#16a34a; --okbg:#dcfce7; --warn:#d97706; --warnbg:#fef3c7; --bad:#dc2626; --badbg:#fee2e2; --grey:#94a3b8;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",system-ui,Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.45}
+header{background:var(--navy);color:#fff;padding:10px 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+header .brand b{font-size:20px;letter-spacing:1px}
+header .brand span{opacity:.85;font-size:12px;margin-left:8px}
+.badge{background:#fde68a;color:#78350f;font-weight:700;font-size:11px;padding:3px 10px;border-radius:12px}
+nav{display:flex;flex-wrap:wrap;gap:6px;padding:10px 16px;background:#fff;border-bottom:1px solid var(--line)}
+nav button{border:1px solid var(--line);background:#fff;border-radius:18px;padding:6px 14px;cursor:pointer;font:inherit;font-weight:600;color:var(--navy)}
+nav button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.story{background:#fff;border-bottom:1px solid var(--line);padding:10px 16px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.steps{display:flex;gap:4px;flex-wrap:wrap}
+.steps span{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:700;background:#e2e8f0;color:var(--muted);cursor:pointer}
+.steps span.done{background:#99f6e4;color:#134e4a}
+.steps span.on{background:var(--teal);color:#fff}
+.story .txt{flex:1;min-width:240px}
+.story .txt b{color:var(--teal);font-size:15px}
+.story .txt div{color:var(--muted);font-size:13px}
+.story .ctl button{font:inherit;font-weight:700;border:none;border-radius:8px;padding:8px 14px;cursor:pointer}
+.prev{background:#e2e8f0;color:var(--ink)} .next{background:var(--teal);color:#fff}
+main{padding:16px;max-width:1200px;margin:0 auto}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))} .g3{grid-template-columns:repeat(3,minmax(0,1fr))} .g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:800px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.card h3{margin:0 0 8px;font-size:15px;color:var(--navy)}
+.muted{color:var(--muted);font-size:12.5px}
+.pill{display:inline-block;padding:2px 9px;border-radius:10px;font-size:11.5px;font-weight:700}
+.ok{background:var(--okbg);color:#166534} .warn{background:var(--warnbg);color:#92400e} .bad{background:var(--badbg);color:#991b1b} .idle{background:#e2e8f0;color:#334155}
+.kv{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed #e2e8f0}
+.kv:last-child{border-bottom:none}
+.btn{font:inherit;font-weight:700;border:none;border-radius:8px;padding:8px 14px;cursor:pointer;background:var(--teal);color:#fff}
+.btn.ghost{background:#fff;color:var(--navy);border:1px solid var(--line)}
+.btn.red{background:var(--red)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+/* candidate */
+.exam{max-width:760px;margin:0 auto}
+.examtop{display:flex;justify-content:space-between;align-items:center;background:var(--navy);color:#fff;padding:10px 14px;border-radius:10px 10px 0 0}
+.timer{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums}
+.exambody{background:#fff;border:1px solid var(--line);border-top:none;border-radius:0 0 10px 10px;padding:16px}
+.opt{display:block;width:100%;text-align:left;border:1px solid var(--line);background:#fff;border-radius:8px;padding:10px 12px;margin:6px 0;cursor:pointer;font:inherit}
+.opt.sel{border-color:var(--teal);background:#ecfdf5;font-weight:600}
+.qnav{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}
+.qnav span{width:28px;height:28px;border-radius:6px;display:grid;place-items:center;font-size:12px;font-weight:700;background:#e2e8f0;cursor:pointer}
+.qnav span.ans{background:#99f6e4;color:#134e4a} .qnav span.cur{outline:2px solid var(--navy)}
+.savebar{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;margin-top:12px;font-size:12.5px;color:var(--muted)}
+.dark{background:#020617;color:#e2e8f0;border-radius:10px;padding:40px 20px;text-align:center}
+.dark h2{margin:0 0 8px;color:#fbbf24}
+/* seats */
+.seats{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.seat{border-radius:8px;padding:6px 4px;text-align:center;font-size:11px;font-weight:700;border:1px solid transparent}
+.seat small{display:block;font-weight:500;font-size:10px}
+.s-act{background:var(--okbg);color:#166534} .s-pause{background:var(--warnbg);color:#92400e;border-color:#f59e0b}
+.s-res{background:#dbeafe;color:#1e40af} .s-sub{background:#e2e8f0;color:#334155}
+.legend span{margin-right:8px}
+/* centres */
+.centre{border-left:5px solid var(--ok)}
+.centre.amber{border-left-color:var(--warn)} .centre.red{border-left-color:var(--bad)}
+.bar{height:8px;background:#e2e8f0;border-radius:6px;overflow:hidden;margin:4px 0}
+.bar i{display:block;height:100%;background:var(--ok)}
+.feed{max-height:260px;overflow:auto}
+.feed div{padding:6px 0;border-bottom:1px solid #f1f5f9;font-size:13px}
+.feed time{color:var(--muted);font-variant-numeric:tabular-nums;margin-right:6px}
+.cam{background:#0f172a;color:#cbd5e1;border-radius:8px;height:110px;position:relative;display:flex;align-items:flex-end;padding:8px;font-size:12px;overflow:hidden}
+.cam::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 2px,transparent 2px 4px)}
+.cam .rec{position:absolute;top:8px;right:8px;color:#f87171;font-weight:700}
+.cam.covered{background:#111}
+.cam.covered .alert{position:absolute;inset:auto 8px 30px 8px;background:var(--bad);color:#fff;border-radius:6px;padding:4px 8px;font-weight:700}
+.ladder div{display:flex;gap:10px;align-items:center;padding:7px 10px;border-radius:8px;margin:4px 0;background:#f8fafc;border:1px solid #e2e8f0}
+.ladder div.pick{background:#ecfdf5;border-color:var(--teal);font-weight:700}
+.ladder b{width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:12px}
+.chain{font-family:Consolas,monospace;font-size:12px}
+.chain div{padding:5px 8px;border-radius:6px;margin:3px 0;background:#f8fafc;border:1px solid #e2e8f0;word-break:break-all}
+.chain div.broken{background:var(--badbg);border-color:#fca5a5}
+.msg{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:10px 12px;margin:6px 0}
+.msg .hi{color:var(--muted)}
+.note{font-size:12px;color:var(--muted);text-align:center;padding:16px}
+.hidden{display:none}
+header .brand{min-width:0}
+@media(max-width:700px){
+  header .brand span{display:block;margin-left:0}
+  .story .ctl{width:100%;display:flex;gap:8px}
+  .story .ctl button{flex:1}
+  main{padding:12px}
+  .seats{grid-template-columns:repeat(4,1fr)}
+  .savebar{flex-direction:column}
+}
+.triage{background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:8px 10px;margin-top:8px;font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><b>ASTRA</b><span>Assessment Security, Telemetry &amp; Resilience Architecture</span></div>
+  <div class="badge">DESIGN PROTOTYPE · SIMULATED DATA</div>
+</header>
+
+<nav id="tabs"></nav>
+
+<div class="story">
+  <div class="steps" id="steps"></div>
+  <div class="txt"><b id="stTitle"></b><div id="stDesc"></div></div>
+  <div class="ctl"><button class="prev" id="prevBtn">◀ Back</button> <button class="next" id="nextBtn">Next step ▶</button></div>
+</div>
+
+<main id="view"></main>
+<div class="note">Design prototype showing how ASTRA would behave. All centres, candidates and events are simulated. Fingerprints (SHA-256) and backup sizes are calculated live in your browser.</div>
+
+<script>
+/* ---------------- Scenario ---------------- */
+const STEPS = [
+  {t:"1 · A normal exam", d:"6 centres in Madhya Pradesh are running a computer-based recruitment exam. Everything is green."},
+  {t:"2 · Warning signs", d:"Bhopal Centre BPL-02's battery backup kicks in three times in 10 minutes. ASTRA's AI raises the centre's failure risk before anything breaks."},
+  {t:"3 · Power cut in Room 2", d:"Room 2 loses power. Every answer is already saved. ASTRA freezes the exam clock for those candidates and identifies the problem in seconds."},
+  {t:"4 · Everyone is informed", d:"Candidates, families at the gate and officials get an official update within 18 seconds. An invigilator's Hindi note is turned into a structured report."},
+  {t:"5 · Power back: continue", d:"The invigilator approves. Candidates continue on the same or a spare PC with the same answers and exactly the time they had left."},
+  {t:"6 · Decision", d:"ASTRA recommends 'Continue and give back lost time', shows its reasons, and two officials approve. No cancellation, no re-test."},
+  {t:"7 · Proof and trust", d:"An automatic incident report, a tamper-proof record, and a receipt each candidate can check. Try tampering with the record yourself."}
+];
+const TABS = [["candidate","Candidate"],["invigilator","Invigilator"],["centre","Centre Admin"],["authority","Exam Authority"],["trust","Proof & Trust"]];
+let step = 0, tab = "candidate";
+
+/* ---------------- Fake data ---------------- */
+const QUESTIONS = [
+  {q:"Which river is known as the lifeline of Madhya Pradesh?", o:["Narmada","Ganga","Godavari","Yamuna"]},
+  {q:"What is 15% of 240?", o:["32","36","40","24"]},
+  {q:"Choose the correctly spelt word.", o:["Accomodation","Acommodation","Accommodation","Acomodation"]},
+  {q:"If a train travels 180 km in 3 hours, its average speed is:", o:["50 km/h","60 km/h","70 km/h","90 km/h"]},
+  {q:"Which of these is an input device?", o:["Monitor","Printer","Keyboard","Speaker"]},
+  {q:"The capital of Madhya Pradesh is:", o:["Indore","Jabalpur","Gwalior","Bhopal"]}
+];
+const answers = {0:0,1:1,2:2};   // pre-answered
+let cur = 3, resumedApproved = false, camCovered = false, tampered = false;
+const CENTRES = [
+  {id:"BPL-01",city:"Bhopal",cand:240},{id:"BPL-02",city:"Bhopal",cand:200},{id:"IDR-01",city:"Indore",cand:260},
+  {id:"JBP-01",city:"Jabalpur",cand:180},{id:"GWL-01",city:"Gwalior",cand:220},{id:"UJN-01",city:"Ujjain",cand:160}
+];
+
+/* ---------------- Helpers ---------------- */
+const $ = s => document.querySelector(s);
+const h = (s) => s; // template helper
+function timeLeft(){ return step<=1 ? "42:10" : (step<=3 ? "38:52" : "38:52"); }
+function capsule(){
+  return {exam:"SRE-2026-S2",session:"C-7F3A9",seed:84721,pos:cur,
+    answers:Object.entries(answers).map(([q,a])=>[+q,a]), ledger:[[ "10:00:00","10:42:07"]].concat(step>=4?[["10:48:21",null]]:[]),
+    allowed:3600, seq: 40+Object.keys(answers).length+ (step>=4?2:0)};
+}
+async function sha(s){
+  if (window.crypto && crypto.subtle) {
+    const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
+    return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("");
+  }
+  return sha256Fallback(s);
+}
+// Plain-JS SHA-256, used only where WebCrypto is unavailable (e.g. some file:// previews).
+function sha256Fallback(str){
+  const K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+  const bytes=new TextEncoder().encode(str), l=bytes.length;
+  const n=((l+9+63)>>6)<<6, m=new Uint8Array(n); m.set(bytes); m[l]=0x80;
+  const bits=l*8; for(let i=0;i<4;i++) m[n-1-i]=(bits>>>(8*i))&255;
+  let H=[0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
+  const w=new Array(64), r=(x,k)=>(x>>>k)|(x<<(32-k));
+  for(let o=0;o<n;o+=64){
+    for(let i=0;i<16;i++) w[i]=(m[o+4*i]<<24)|(m[o+4*i+1]<<16)|(m[o+4*i+2]<<8)|m[o+4*i+3];
+    for(let i=16;i<64;i++){const s0=r(w[i-15],7)^r(w[i-15],18)^(w[i-15]>>>3), s1=r(w[i-2],17)^r(w[i-2],19)^(w[i-2]>>>10); w[i]=(w[i-16]+s0+w[i-7]+s1)|0;}
+    let [a,b,c,d,e,f,g,h]=H;
+    for(let i=0;i<64;i++){const S1=r(e,6)^r(e,11)^r(e,25), ch=(e&f)^(~e&g), t1=(h+S1+ch+K[i]+w[i])|0, S0=r(a,2)^r(a,13)^r(a,22), mj=(a&b)^(a&c)^(b&c), t2=(S0+mj)|0; h=g;g=f;f=e;e=(d+t1)|0;d=c;c=b;b=a;a=(t1+t2)|0;}
+    H=[H[0]+a,H[1]+b,H[2]+c,H[3]+d,H[4]+e,H[5]+f,H[6]+g,H[7]+h].map(x=>x|0);
+  }
+  return H.map(x=>(x>>>0).toString(16).padStart(8,"0")).join("");
+}
+
+/* ---------------- Render shell ---------------- */
+function renderShell(){
+  $("#tabs").innerHTML = TABS.map(([k,l])=>`<button class="${k===tab?'on':''}" data-t="${k}">${l}</button>`).join("");
+  $("#steps").innerHTML = STEPS.map((s,i)=>`<span class="${i===step?'on':(i<step?'done':'')}" data-s="${i}" title="${s.t}">${i+1}</span>`).join("");
+  $("#stTitle").textContent = STEPS[step].t;
+  $("#stDesc").textContent = STEPS[step].d;
+  $("#prevBtn").disabled = step===0; $("#nextBtn").disabled = step===STEPS.length-1;
+  document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{tab=b.dataset.t;render();});
+  document.querySelectorAll("#steps span").forEach(b=>b.onclick=()=>{step=+b.dataset.s;render();});
+}
+$("#prevBtn").onclick=()=>{ if(step>0){step--;render();} };
+$("#nextBtn").onclick=()=>{ if(step<STEPS.length-1){step++; if(step===4) tab = tab; render();} };
+
+/* ---------------- Candidate ---------------- */
+async function viewCandidate(){
+  const v = $("#view");
+  if(step===2 || step===3){
+    v.innerHTML = `<div class="exam"><div class="dark"><h2>⚡ Power lost at your PC</h2>
+      <p>Don't worry. <b>All your answers were saved</b> before the power went out.</p>
+      <p>Your exam clock is <b>paused at ${timeLeft()}</b>. You will not lose any time.</p>
+      ${step===3?`<div class="msg" style="text-align:left;color:#0f172a"><b>📩 Official update (10:42:25)</b><br>Power failure in Room 2. Your answers are saved and your clock is paused. Please stay seated; you will continue shortly.<div class="hi">कक्ष 2 में बिजली बाधित। आपके उत्तर सुरक्षित हैं और समय रुका हुआ है। कृपया अपनी सीट पर बैठे रहें।</div><div class="muted">Verification code: AST-7Q4K-21</div></div>`:``}
+      </div></div>`;
+    return;
+  }
+  if(step===4 && !resumedApproved){
+    v.innerHTML = `<div class="exam"><div class="card" style="text-align:center;padding:30px">
+      <h3 style="font-size:20px">Continue your exam</h3>
+      <p>Candidate code <b>C-7F3A9</b> · PC <b>R2-S14</b></p>
+      <div class="grid g3" style="text-align:left;margin:14px 0">
+        <div class="card"><div class="muted">Answers restored</div><b style="font-size:20px">${Object.keys(answers).length} / ${QUESTIONS.length}</b></div>
+        <div class="card"><div class="muted">Time left</div><b style="font-size:20px">38:52</b></div>
+        <div class="card"><div class="muted">Time lost</div><b style="font-size:20px;color:var(--ok)">0 min</b></div>
+      </div>
+      <p class="muted">Restored from the centre server copy · all 3 copies match ✓</p>
+      <button class="btn" id="apprBtn">Invigilator approves → continue</button></div></div>`;
+    $("#apprBtn").onclick=()=>{resumedApproved=true;render();};
+    return;
+  }
+  const c = capsule(); const js = JSON.stringify(c); const fp = await sha(js);
+  const q = QUESTIONS[cur];
+  v.innerHTML = `<div class="exam">
+    <div class="examtop"><div><b>Sample State Recruitment Exam</b><div class="muted" style="color:#cbd5e1">Candidate C-7F3A9 · PC ${step>=4?'R2-S14 (continued)':'R2-S14'}</div></div>
+    <div style="text-align:right"><div class="muted" style="color:#cbd5e1">Time left</div><div class="timer">${timeLeft()}</div></div></div>
+    <div class="exambody">
+      ${step>=4?`<div class="msg">✅ <b>Welcome back.</b> Your answers and time were restored exactly. Time lost to the power cut: <b>0 minutes</b>.</div>`:''}
+      <div class="muted">Question ${cur+1} of ${QUESTIONS.length}</div>
+      <h3 style="font-size:17px;margin:6px 0 10px">${q.q}</h3>
+      ${q.o.map((o,i)=>`<button class="opt ${answers[cur]===i?'sel':''}" data-o="${i}">${String.fromCharCode(65+i)}. ${o}</button>`).join("")}
+      <div class="qnav">${QUESTIONS.map((_,i)=>`<span class="${i in answers?'ans':''} ${i===cur?'cur':''}" data-q="${i}">${i+1}</span>`).join("")}</div>
+      <div class="savebar"><span>💾 Saved to disk ✓ · copied to centre servers ✓</span><span>Backup size: <b>${js.length} bytes</b> · fingerprint <code>${fp.slice(0,12)}…</code></span></div>
+    </div></div>`;
+  v.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{answers[cur]=+b.dataset.o;render();});
+  v.querySelectorAll(".qnav span").forEach(b=>b.onclick=()=>{cur=+b.dataset.q;render();});
+}
+
+/* ---------------- Invigilator ---------------- */
+function seatState(i){
+  if(i===17) return ["s-sub","Submitted"];
+  if(step===2||step===3) return ["s-pause","Paused"];
+  if(step===4 && !resumedApproved) return [i%3===0?"s-res":"s-pause", i%3===0?"Resuming":"Paused"];
+  return ["s-act","Active"];
+}
+function viewInvigilator(){
+  const seats = Array.from({length:20},(_,i)=>{const [c,l]=seatState(i);return `<div class="seat ${c}">S${i+1}<small>${l}</small></div>`}).join("");
+  $("#view").innerHTML = `<div class="grid g2">
+    <div class="card"><h3>Room 2 · Bhopal Centre BPL-02 · 20 seats</h3>
+      <div class="seats">${seats}</div>
+      <p class="legend muted"><span class="pill ok">Active</span><span class="pill warn">Paused</span><span class="pill" style="background:#dbeafe;color:#1e40af">Resuming</span><span class="pill idle">Submitted</span></p>
+      ${step===4?`<button class="btn" id="apAll" ${resumedApproved?'disabled':''}>${resumedApproved?'✓ All candidates continued':'Approve continue for all 19 candidates'}</button>`:''}
+    </div>
+    <div class="card"><h3>Report a problem</h3>
+      <textarea id="rep" rows="3" style="width:100%;font:inherit;border:1px solid var(--line);border-radius:8px;padding:8px">${step>=3?'Room 2 mein light chali gayi, UPS beep kar raha hai':''}</textarea>
+      <button class="btn ghost" id="triBtn" style="margin-top:6px">Send to centre (AI reads it)</button>
+      <div id="tri">${step>=3?triageHTML():''}</div>
+      <h3 style="margin-top:14px">Room 2 camera</h3>
+      <div class="cam"><span class="rec">● REC</span>Cam R2-A · ${step===2||step===3?'running on battery backup':'normal'}</div>
+    </div></div>`;
+  const ap=$("#apAll"); if(ap) ap.onclick=()=>{resumedApproved=true;render();};
+  $("#triBtn").onclick=()=>{$("#tri").innerHTML=triageHTML();};
+}
+function triageHTML(){
+  return `<div class="triage"><b>⚡ Fast AI reading (offline, 38 ms):</b><br>
+  Problem type: <b>Room power failure</b> (94% sure) · Seriousness: <b>2 of 4</b><br>
+  Alert senior official now? <b>Yes</b> · Answers at risk? <b>No, backups confirmed</b><br>
+  Linked to incident <b>INC-0412</b></div>`;
+}
+
+/* ---------------- Centre admin ---------------- */
+function viewCentre(){
+  const pw = step===2||step===3 ? ["bad","Mains OFF · on battery (22 min left)"] : (step===1?["warn","Battery used 3 times in 10 min"]:["ok","Mains normal"]);
+  const rooms = [1,2,3].map(r=>{
+    let st = ["ok","20 active"]; if(r===2 && (step===2||step===3)) st=["bad","19 paused · power cut"]; if(r===2 && step===4 && !resumedApproved) st=["warn","Resuming"];
+    return `<div class="card"><b>Room ${r}</b><div><span class="pill ${st[0]}">${st[1]}</span></div><div class="muted">Avg. time left ${r===2?timeLeft():'41:30'}</div></div>`;}).join("");
+  const steps = [["Freeze exam clocks for Room 2",step>=2],["Confirm all answers backed up (19/19)",step>=2],["Message candidates and gate display",step>=3],["Alert electrician and centre head",step>=2],["Prepare spare PCs (6 ready)",step>=3],["Resume in waves of 10 when power returns",step>=4]];
+  $("#view").innerHTML = `<div class="grid g3">${rooms}</div>
+  <div class="grid g2" style="margin-top:12px">
+   <div class="card"><h3>Centre health · BPL-02</h3>
+     <div class="kv"><span>Power</span><span class="pill ${pw[0]}">${pw[1]}</span></div>
+     <div class="kv"><span>Centre server (main)</span><span class="pill ok">Running</span></div>
+     <div class="kv"><span>Centre server (spare)</span><span class="pill ok">In sync</span></div>
+     <div class="kv"><span>Exam network</span><span class="pill ok">Normal</span></div>
+     <div class="kv"><span>Internet link to control room</span><span class="pill ok">Connected (one-way)</span></div>
+     <div class="kv"><span>Failure risk (AI)</span><span class="pill ${step>=1?'warn':'ok'}">${step>=1?'71% · battery blips':'8%'}</span></div>
+   </div>
+   <div class="card"><h3>${step>=2?'Incident INC-0412 · Room power failure':'Incidents'}</h3>
+     ${step>=2? steps.map(([s,d])=>`<div class="kv"><span>${s}</span><span class="pill ${d?'ok':'idle'}">${d?'Done ✓':'Waiting'}</span></div>`).join("") : '<p class="muted">No incidents. All rooms normal.</p>'}
+   </div></div>
+  <div class="card" style="margin-top:12px"><h3>Cameras <button class="btn ghost" id="covBtn" style="float:right;padding:4px 10px">${camCovered?'Uncover camera':'Simulate a covered camera'}</button></h3>
+   <div class="grid g4">${["Gate","Room 1","Room 2","Server room"].map((n,i)=>`<div class="cam ${camCovered&&i===1?'covered':''}"><span class="rec">● REC</span>${camCovered&&i===1?'<div class="alert">⚠ Camera covered: alert sent</div>':''}${n}</div>`).join("")}</div>
+   <p class="muted">Every 10-second recording is fingerprinted. Covered, moved, switched-off or looping cameras raise an alert automatically.</p></div>`;
+  $("#covBtn").onclick=()=>{camCovered=!camCovered;render();};
+}
+
+/* ---------------- Exam authority ---------------- */
+function viewAuthority(){
+  const cards = CENTRES.map(c=>{
+    let cls="", st=["ok","Normal"], risk=8+((c.cand*7)%9);
+    if(c.id==="BPL-02"){ if(step===1){cls="amber";st=["warn","Risk rising"];risk=71;} else if(step===2||step===3){cls="red";st=["bad","Room 2 paused"];risk=88;} else if(step===4&&!resumedApproved){cls="amber";st=["warn","Resuming"];risk=40;} else if(step>=4){st=["ok","Recovered"];risk=22;} }
+    const col = risk>60?"var(--bad)":risk>30?"var(--warn)":"var(--ok)";
+    return `<div class="card centre ${cls}"><b>${c.id}</b> <span class="muted">${c.city}</span><div><span class="pill ${st[0]}">${st[1]}</span></div>
+      <div class="muted" style="margin-top:6px">Failure risk ${risk}%</div><div class="bar"><i style="width:${risk}%;background:${col}"></i></div>
+      <div class="muted">${c.cand} candidates</div></div>`;}).join("");
+  const feed = [
+    [0,"10:00:00","Exam started at 6 centres (1,260 candidates)"],
+    [1,"10:31:40","BPL-02: battery backup used 3 times in 10 min. Risk 8% → 71%. Reason: repeated power blips"],
+    [2,"10:42:07","BPL-02 Room 2: power failure detected (4 s). Clocks frozen. 19/19 answers backed up"],
+    [3,"10:42:25","Official update sent to 19 candidates + gate display (code AST-7Q4K-21)"],
+    [3,"10:43:02","Invigilator note (Hindi) read by AI → linked to INC-0412"],
+    [4,"10:48:21","Power restored. 19 candidates resumed in 2 waves. 0 answers lost"],
+    [5,"10:49:10","Decision approved: Continue + give back 6 min 14 s (2 officials)"],
+    [6,"11:20:00","Incident report INC-0412 generated · record verified"]
+  ].filter(f=>f[0]<=step).map(f=>`<div><time>${f[1]}</time>${f[2]}</div>`).reverse().join("");
+  const ladder = [["Continue and give back lost time","Outage 6 min, all answers safe"],["Extend the room's exam time","Longer outage"],["Move candidates the same day","Centre unusable"],["Re-test only affected candidates","Very long outage"],["Hold the whole exam again","Widespread damage or breach"]];
+  $("#view").innerHTML = `<div class="grid g3">${cards}</div>
+  <div class="grid g2" style="margin-top:12px">
+    <div class="card"><h3>Live event feed</h3><div class="feed">${feed}</div></div>
+    <div class="card"><h3>Decision help</h3>
+      ${step>=5?`<div class="ladder">${ladder.map((l,i)=>`<div class="${i===0?'pick':''}"><b>${i}</b><span>${l[0]}<br><span class="muted">${l[1]}</span></span></div>`).join("")}</div>
+      <div class="msg"><b>Why step 0:</b> outage lasted 6 min 14 s, all 3 answer copies match, no security alerts, no clash with the next shift. <br><b>Approved by:</b> Regional Coordinator ✓ · Exam Controller ✓</div>`
+      : `<p class="muted">${step>=2?'Collecting evidence… a recommendation appears once the room has recovered.':'No decision needed.'}</p>`}
+    </div></div>`;
+}
+
+/* ---------------- Trust ---------------- */
+const EVENTS = ["10:00:00 exam.start centre=BPL-02","10:41:58 answer.saved C-7F3A9 q=3","10:42:07 power.fail room=2","10:42:07 clock.freeze room=2 sessions=19","10:42:25 msg.sent code=AST-7Q4K-21","10:48:21 session.resume C-7F3A9 pc=R2-S14","10:49:10 decision.approve level=0 credit=374s"];
+let stored = null;
+async function viewTrust(){
+  if(!stored){ let prev="0".repeat(64); stored=[]; for(const e of EVENTS){ const hh=await sha(prev+e); stored.push({e,prev,h:hh}); prev=hh; } }
+  // verify
+  let ok=true; let prev="0".repeat(64); const rows=[];
+  for(let i=0;i<stored.length;i++){
+    const text = (tampered && i===3) ? "10:42:07 clock.freeze room=2 sessions=19 credit=900s" : stored[i].e;
+    const hh = await sha(prev+text);
+    const good = ok && hh===stored[i].h; if(!good) ok=false;
+    rows.push(`<div class="${good?'':'broken'}">${good?'✓':'✗'} ${text}<br><span class="muted">fingerprint ${stored[i].h.slice(0,24)}…</span></div>`);
+    prev = stored[i].h;
+  }
+  const c = capsule(); const receipt = (await sha(JSON.stringify(c))).slice(0,10).toUpperCase();
+  $("#view").innerHTML = `<div class="grid g2">
+    <div class="card"><h3>Tamper-proof record · INC-0412</h3>
+      <p class="muted">Each entry's fingerprint includes the previous one, so changing any line breaks the chain from that point on.</p>
+      <div class="chain">${rows.join("")}</div>
+      <p><span class="pill ${ok?'ok':'bad'}">${ok?'Record verified ✓':'Tampering detected ✗ (entry 4 was changed)'}</span></p>
+      <button class="btn ${tampered?'ghost':'red'}" id="tamBtn">${tampered?'Undo the change':'Try to secretly change entry 4'}</button>
+    </div>
+    <div class="card"><h3>Incident report (automatic)</h3>
+      <div class="kv"><span>Incident</span><b>INC-0412 · Room power failure</b></div>
+      <div class="kv"><span>Centre / room</span><b>BPL-02 / Room 2</b></div>
+      <div class="kv"><span>Candidates affected</span><b>19</b></div>
+      <div class="kv"><span>Detected in</span><b>4 seconds</b></div>
+      <div class="kv"><span>First message after</span><b>18 seconds</b></div>
+      <div class="kv"><span>Answers lost</span><b style="color:var(--ok)">0</b></div>
+      <div class="kv"><span>Time given back</span><b>6 min 14 s each</b></div>
+      <div class="kv"><span>Decision</span><b>Continue (approved by 2 officials)</b></div>
+      <div class="kv"><span>Exam cancelled?</span><b style="color:var(--ok)">No</b></div>
+      <h3 style="margin-top:14px">Candidate receipt</h3>
+      <p>Candidate C-7F3A9 receipt code: <b>${receipt}</b></p>
+      <p class="muted">Calculated from the candidate's final answer backup. Any later change to their answers would produce a different code.</p>
+    </div></div>`;
+  $("#tamBtn").onclick=()=>{tampered=!tampered;render();};
+}
+
+/* ---------------- Main render ---------------- */
+async function render(){
+  if(step<4) resumedApproved=false;
+  if(step>=5) resumedApproved=true;
+  renderShell();
+  if(tab==="candidate") await viewCandidate();
+  else if(tab==="invigilator") viewInvigilator();
+  else if(tab==="centre") viewCentre();
+  else if(tab==="authority") viewAuthority();
+  else await viewTrust();
+}
+render();
+</script>
+</body>
+</html>

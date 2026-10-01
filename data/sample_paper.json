@@ -1,0 +1,77 @@
+{
+  "note": "Sample questions written by the team for testing.",
+  "questions": [
+    {
+      "id": 1,
+      "q": "Which river is known as the lifeline of Madhya Pradesh?",
+      "q_hi": "किस नदी को मध्य प्रदेश की जीवनरेखा कहा जाता है?",
+      "options": [
+        "Narmada",
+        "Ganga",
+        "Godavari",
+        "Yamuna"
+      ],
+      "answer": 0
+    },
+    {
+      "id": 2,
+      "q": "What is 15% of 240?",
+      "q_hi": "240 का 15% कितना है?",
+      "options": [
+        "32",
+        "36",
+        "40",
+        "24"
+      ],
+      "answer": 1
+    },
+    {
+      "id": 3,
+      "q": "Choose the correctly spelt word.",
+      "q_hi": "सही वर्तनी वाला शब्द चुनिए।",
+      "options": [
+        "Accomodation",
+        "Acommodation",
+        "Accommodation",
+        "Acomodation"
+      ],
+      "answer": 2
+    },
+    {
+      "id": 4,
+      "q": "If a train travels 180 km in 3 hours, its average speed is:",
+      "q_hi": "यदि एक ट्रेन 3 घंटे में 180 किमी चलती है, तो उसकी औसत गति है:",
+      "options": [
+        "50 km/h",
+        "60 km/h",
+        "70 km/h",
+        "90 km/h"
+      ],
+      "answer": 1
+    },
+    {
+      "id": 5,
+      "q": "Which of these is an input device?",
+      "q_hi": "इनमें से कौन-सा इनपुट डिवाइस है?",
+      "options": [
+        "Monitor",
+        "Printer",
+        "Keyboard",
+        "Speaker"
+      ],
+      "answer": 2
+    },
+    {
+      "id": 6,
+      "q": "The capital of Madhya Pradesh is:",
+      "q_hi": "मध्य प्रदेश की राजधानी है:",
+      "options": [
+        "Indore",
+        "Jabalpur",
+        "Gwalior",
+        "Bhopal"
+      ],
+      "answer": 3
+    }
+  ]
+}

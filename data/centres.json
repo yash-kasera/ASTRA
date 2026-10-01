@@ -1,0 +1,113 @@
+{
+  "note": "Simulated centres for testing. Not real exam centres.",
+  "centres": [
+    {
+      "id": "BPL-01",
+      "city": "Bhopal",
+      "rooms": [
+        {
+          "room": 1,
+          "seats": 20
+        },
+        {
+          "room": 2,
+          "seats": 20
+        },
+        {
+          "room": 3,
+          "seats": 20
+        }
+      ]
+    },
+    {
+      "id": "BPL-02",
+      "city": "Bhopal",
+      "rooms": [
+        {
+          "room": 1,
+          "seats": 20
+        },
+        {
+          "room": 2,
+          "seats": 20
+        },
+        {
+          "room": 3,
+          "seats": 20
+        }
+      ]
+    },
+    {
+      "id": "IDR-01",
+      "city": "Indore",
+      "rooms": [
+        {
+          "room": 1,
+          "seats": 20
+        },
+        {
+          "room": 2,
+          "seats": 20
+        },
+        {
+          "room": 3,
+          "seats": 20
+        }
+      ]
+    },
+    {
+      "id": "JBP-01",
+      "city": "Jabalpur",
+      "rooms": [
+        {
+          "room": 1,
+          "seats": 20
+        },
+        {
+          "room": 2,
+          "seats": 20
+        },
+        {
+          "room": 3,
+          "seats": 20
+        }
+      ]
+    },
+    {
+      "id": "GWL-01",
+      "city": "Gwalior",
+      "rooms": [
+        {
+          "room": 1,
+          "seats": 20
+        },
+        {
+          "room": 2,
+          "seats": 20
+        },
+        {
+          "room": 3,
+          "seats": 20
+        }
+      ]
+    },
+    {
+      "id": "UJN-01",
+      "city": "Ujjain",
+      "rooms": [
+        {
+          "room": 1,
+          "seats": 20
+        },
+        {
+          "room": 2,
+          "seats": 20
+        },
+        {
+          "room": 3,
+          "seats": 20
+        }
+      ]
+    }
+  ]
+}

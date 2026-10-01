@@ -52,6 +52,7 @@ Today the only fix is to **cancel and re-test**. Candidates lose money, time and
 
 | Document | |
 |---|---|
+| **Solution Presentation (slides)** | [PDF](docs/submission/2_Solution_Presentation.pdf) |
 | Solution Synopsis | [PDF](docs/submission/1_Solution_Synopsis_Executive_Summary.pdf) |
 | Problem Statement & Proposed Solution | [PDF](docs/submission/3_Problem_Statement_and_Proposed_Solution.pdf) |
 | Innovation & Differentiation | [PDF](docs/submission/4_Innovation_and_Differentiation_Note.pdf) |
